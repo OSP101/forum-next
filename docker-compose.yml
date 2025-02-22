@@ -1,0 +1,8 @@
+version: '3'
+services:
+  forum-next:
+    container_name: forum-next
+    restart: always
+    build: .
+    ports:
+      - "7776:3000"
