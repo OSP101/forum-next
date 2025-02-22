@@ -160,7 +160,7 @@ npm run dev
 
 ### 6. Delete customer
 - Method: DELETE
-- URL: /api/v1/customer/${id}
+- URL: /api/v1/forum/${id}
 
 ---
 ## 📞 ติดต่อผู้พัฒนา
