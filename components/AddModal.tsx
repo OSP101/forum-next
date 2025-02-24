@@ -12,7 +12,7 @@ export default function AddModal({ isOpen, onOpenChange, refresh }: any) {
   const [newForum, setNewForum] = useState({ author: '', detail: '', love: '' })
 
   const handleSubmit = async () => {
-    await axios.post(`${BASE_URL}/api/v1/forum`, newForum)
+    await axios.post(`${BASE_URL}/api/v1/forums`, newForum)
     refresh()
     onOpenChange(false)
   }
