@@ -63,7 +63,7 @@ export default function Home() {
   const fetchForums = async () => {
     try {
       setIsLoading(true)
-      const { data } = await axios.get<ForumResponse>(`${BASE_URL}/api/v1/forum`)
+      const { data } = await axios.get<ForumResponse>(`${BASE_URL}/api/v1/forums`)
       setRawResponse(data)
 
       console.table(data.data)
@@ -89,7 +89,7 @@ export default function Home() {
 
     try {
       setIsLoading(true)
-      const { data } = await axios.get(`${BASE_URL}/api/v1/forum/${search}`)
+      const { data } = await axios.get(`${BASE_URL}/api/v1/forums/${search}`)
 
       const { isValid, errors } = validateApiResponse({ data: [data] })
       if (!isValid) {
@@ -122,7 +122,7 @@ export default function Home() {
         love: 0,
       }
 
-      await axios.post(`${BASE_URL}/api/v1/forum`, newPost)
+      await axios.post(`${BASE_URL}/api/v1/forums`, newPost)
 
       await fetchForums()
       setIsCreating(false)
@@ -135,7 +135,7 @@ export default function Home() {
 
   const handleLike = async (postId: number) => {
     try {
-      await axios.patch(`${BASE_URL}/api/v1/forum/${postId}/love`);
+      await axios.patch(`${BASE_URL}/api/v1/forums/${postId}/love`);
 
     } catch (error) {
       console.error('Like error:', error);
@@ -145,7 +145,7 @@ export default function Home() {
 
   const handleEdit = async (postId: number, newAuthor: string, newDetail: string) => {
     try {
-      await axios.put(`${BASE_URL}/api/v1/forum/${postId}`, {
+      await axios.put(`${BASE_URL}/api/v1/forums/${postId}`, {
         author: newAuthor,
         detail: newDetail
       });
@@ -159,7 +159,7 @@ export default function Home() {
 
   const handleDelete = async (postId: number) => {
     try {
-      await axios.delete(`${BASE_URL}/api/v1/forum/${postId}`);
+      await axios.delete(`${BASE_URL}/api/v1/forums/${postId}`);
 
       await fetchForums()
     } catch (error) {
