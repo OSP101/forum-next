@@ -36,7 +36,7 @@ export default function EditModal({ forum, onClose, refresh }: EditModalProps) {
     const handleSave = async () => {
         setIsLoading(true)
         try {
-            await axios.put(`${BASE_URL}/api/v1/forums/${editForums.id}`, {
+            await axios.put(`${BASE_URL}/api/v1/forum/${editForums.id}`, {
                 author: editForums.author,
                 detail: editForums.detail,
                 love: editForums.love

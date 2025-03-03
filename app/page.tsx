@@ -16,12 +16,11 @@ interface Forum {
 }
 
 interface ForumResponse {
-  data: Forum[]
-  length: number
+  forum: Forum[]
 }
 
 export default function Home() {
-  const [forums, setForums] = useState<ForumResponse>({ data: [], length: 0 })
+  const [forums, setForums] = useState<ForumResponse>({ forum: [] })
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -36,24 +35,24 @@ export default function Home() {
   const validateApiResponse = (data: any) => {
     const errors: string[] = []
 
-    if (!data.data || !Array.isArray(data.data)) {
+    if (!data.forum || !Array.isArray(data.forum)) {
       errors.push("Invalid data structure")
       return { isValid: false, errors }
     }
 
-    if (typeof data.data[0].id !== 'number') {
+    if (typeof data.forum[0].id !== 'number') {
       errors.push(`Missing or invalid "id" field`)
     }
-    if (typeof data.data[0].author !== 'string') {
+    if (typeof data.forum[0].author !== 'string') {
       errors.push(`Missing or invalid "author" field`)
     }
-    if (typeof data.data[0].detail !== 'string') {
+    if (typeof data.forum[0].detail !== 'string') {
       errors.push(`Missing or invalid "detail" field`)
     }
-    if (typeof data.data[0].love !== 'number') {
+    if (typeof data.forum[0].love !== 'number') {
       errors.push(`Missing or invalid "love" field`)
     }
-    if (typeof data.data[0].date !== 'string') {
+    if (typeof data.forum[0].date !== 'string') {
       errors.push(`Missing or invalid "date" field`)
     }
 
@@ -63,11 +62,10 @@ export default function Home() {
   const fetchForums = async () => {
     try {
       setIsLoading(true)
-      const { data } = await axios.get<ForumResponse>(`${BASE_URL}/api/v1/forums`)
+      const { data } = await axios.get<ForumResponse>(`${BASE_URL}/api/v1/forum`)
       setRawResponse(data)
 
-      console.table(data.data)
-      console.table({length:data.length})
+      console.table(data.forum)
       console.log(data)
 
       const { isValid, errors } = validateApiResponse(data)
@@ -89,21 +87,14 @@ export default function Home() {
 
     try {
       setIsLoading(true)
-      const { data } = await axios.get(`${BASE_URL}/api/v1/forums/${search}`)
-
-      const { isValid, errors } = validateApiResponse({ data: [data] })
-      if (!isValid) {
-        setError(`ข้อมูลไม่ถูกต้อง: ${errors.join(', ')}`)
-        return
-      }
+      const { data } = await axios.get(`${BASE_URL}/api/v1/forum/${search}`)
 
       setForums({
-        data: [data],
-        length: 1
+        forum: [data]
       })
       setError(null)
     } catch (err) {
-      setForums({ data: [], length: 0 })
+      setForums({ forum: [] })
       setError(`ไม่พบข้อมูล Forum ID: ${search}`)
     } finally {
       setIsLoading(false)
@@ -122,7 +113,7 @@ export default function Home() {
         love: 0,
       }
 
-      await axios.post(`${BASE_URL}/api/v1/forums`, newPost)
+      await axios.post(`${BASE_URL}/api/v1/forum`, newPost)
 
       await fetchForums()
       setIsCreating(false)
@@ -135,7 +126,7 @@ export default function Home() {
 
   const handleLike = async (postId: number) => {
     try {
-      await axios.patch(`${BASE_URL}/api/v1/forums/${postId}/love`);
+      await axios.patch(`${BASE_URL}/api/v1/forum/${postId}/love`);
 
     } catch (error) {
       console.error('Like error:', error);
@@ -145,7 +136,7 @@ export default function Home() {
 
   const handleEdit = async (postId: number, newAuthor: string, newDetail: string) => {
     try {
-      await axios.put(`${BASE_URL}/api/v1/forums/${postId}`, {
+      await axios.put(`${BASE_URL}/api/v1/forum/${postId}`, {
         author: newAuthor,
         detail: newDetail
       });
@@ -159,7 +150,7 @@ export default function Home() {
 
   const handleDelete = async (postId: number) => {
     try {
-      await axios.delete(`${BASE_URL}/api/v1/forums/${postId}`);
+      await axios.delete(`${BASE_URL}/api/v1/forum/${postId}`);
 
       await fetchForums()
     } catch (error) {
@@ -270,7 +261,7 @@ export default function Home() {
 
         {!isLoading && !error && (
           <ForumPage
-            data={forums.data}
+            data={forums.forum}
             onLike={handleLike}
             onEdit={handleEdit}
             onDelete={handleDelete}

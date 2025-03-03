@@ -51,13 +51,12 @@ npm run dev
 
 ### 1. Get all forum
 - Method: GET
-- Endpoint: /api/v1/forums
+- Endpoint: /api/v1/forum
 - Parameters
 
   Parameter | ชนิด | คำอธิบาย
   ---- | ---- | ---- |
-  length | String | จำนวนฟอรัม
-  data | Array | ข้อมูลฟอรัม
+  forum | Array | ข้อมูลฟอรัม
 
     Parameter | ชนิด | คำอธิบาย
   ---- | ---- | ---- |
@@ -71,8 +70,7 @@ npm run dev
 - Body:
 ```json
 {
-    "length": 2,
-    "data": [
+    "forum": [
         {
             "id": 1,
             "author": "OSP101",
@@ -93,7 +91,7 @@ npm run dev
 
 ### 2. Get forum by ID
 - Method: GET
-- Endpoint: /api/v1/forums/${id}
+- Endpoint: /api/v1/forum/${id}
 - Parameters
 
     Parameter | ชนิด | คำอธิบาย
@@ -117,7 +115,7 @@ npm run dev
 
 ### 3. Create forum
 - Method: POST
-- Endpoint: /api/v1/forums
+- Endpoint: /api/v1/forum
 - Parameters
 
     Parameter | ชนิด | คำอธิบาย
@@ -137,7 +135,7 @@ npm run dev
 
 ### 4. Update forun
 - Method: PUT
-- Endpoint: /api/v1/forums/${id}
+- Endpoint: /api/v1/forum/${id}
 - Parameters
 
     Parameter | ชนิด | คำอธิบาย
@@ -155,12 +153,12 @@ npm run dev
 
 ### 5. Update love state
 - Method: PATCH
-- Endpoint: /api/v1/forums/${id}/love
+- Endpoint: /api/v1/forum/${id}/love
 
 
 ### 6. Delete customer
 - Method: DELETE
-- URL: /api/v1/forums/${id}
+- URL: /api/v1/forum/${id}
 
 ---
 ## 📞 ติดต่อผู้พัฒนา
