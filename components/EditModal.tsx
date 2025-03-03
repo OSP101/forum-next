@@ -16,7 +16,6 @@ const kanit = Prompt({ subsets: ["latin"], weight: ['100', '200', '300', '400', 
 
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY
 
 interface EditModalProps {
     forum: {
@@ -41,12 +40,7 @@ export default function EditModal({ forum, onClose, refresh }: EditModalProps) {
                 author: editForums.author,
                 detail: editForums.detail,
                 love: editForums.love
-            }, {
-                headers: {
-                  'Content-Type': 'application/json',
-                  'x-api-key': API_KEY
-                }
-              })
+            })
             refresh()
             onClose()
         } catch (error) {

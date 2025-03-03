@@ -6,7 +6,6 @@ import { MagnifyingGlassIcon, PlusCircleIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY
 
 interface Forum {
   id: number
@@ -63,12 +62,7 @@ export default function Home() {
   const fetchForums = async () => {
     try {
       setIsLoading(true)
-      const { data } = await axios.get<ForumResponse>(`${BASE_URL}/api/v1/forum`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': API_KEY
-        }
-      })
+      const { data } = await axios.get<ForumResponse>(`${BASE_URL}/api/v1/forum`)
       setRawResponse(data)
 
       console.table(data.forum)
@@ -93,12 +87,7 @@ export default function Home() {
 
     try {
       setIsLoading(true)
-      const { data } = await axios.get(`${BASE_URL}/api/v1/forum/${search}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': API_KEY
-        }
-      })
+      const { data } = await axios.get(`${BASE_URL}/api/v1/forum/${search}`)
 
       setForums({
         forum: [data]
@@ -124,12 +113,7 @@ export default function Home() {
         love: 0,
       }
 
-      await axios.post(`${BASE_URL}/api/v1/forum`, newPost , {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': API_KEY
-        }
-      })
+      await axios.post(`${BASE_URL}/api/v1/forum`, newPost)
 
       await fetchForums()
       setIsCreating(false)
@@ -142,12 +126,7 @@ export default function Home() {
 
   const handleLike = async (postId: number) => {
     try {
-      await axios.patch(`${BASE_URL}/api/v1/forum/${postId}/love`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': API_KEY
-        }
-      });
+      await axios.patch(`${BASE_URL}/api/v1/forum/${postId}/love`);
 
     } catch (error) {
       console.error('Like error:', error);
@@ -160,11 +139,6 @@ export default function Home() {
       await axios.put(`${BASE_URL}/api/v1/forum/${postId}`, {
         author: newAuthor,
         detail: newDetail
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': API_KEY
-        }
       });
 
       await fetchForums()
@@ -176,12 +150,7 @@ export default function Home() {
 
   const handleDelete = async (postId: number) => {
     try {
-      await axios.delete(`${BASE_URL}/api/v1/forum/${postId}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': API_KEY
-        }
-      });
+      await axios.delete(`${BASE_URL}/api/v1/forum/${postId}`);
 
       await fetchForums()
     } catch (error) {

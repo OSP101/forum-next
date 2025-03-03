@@ -38,7 +38,6 @@ npm install
 สร้างไฟล์ `.env.local` ไว้ที่ root และกรอกดังนี้:
 ```bash
 NEXT_PUBLIC_API_URL=http://your-api-url
-NEXT_PUBLIC_API_KEY=your_api_key
 ```
 ### ขั้นตอนที่ 5: รันโปรเจกต์
 ```bash
@@ -67,13 +66,6 @@ npm run dev
   love | Int | จำนวนหัวใจฟอรัม
   date | String | วัน เวลาที่สร้างฟอรัม
 
-- Header:
-```json
-headers: {
-  "Content-Type": "application/json",
-  "x-api-key": "API_KEY"
-}
-```
 
 - Body:
 ```json
@@ -109,13 +101,7 @@ headers: {
   detail | String | รายละเอียดข้อมูลฟอรัม
   love | Int | จำนวนหัวใจฟอรัม
   date | String | วัน เวลาที่สร้างฟอรัม
-- Header:
-```json
-headers: {
-  "Content-Type": "application/json",
-  "x-api-key": "API_KEY"
-}
-```
+
 - Body:
 ```json
 {
@@ -137,13 +123,7 @@ headers: {
   author | String | ชื่อผู้เขียนฟอรัม
   detail | String | รายละเอียดข้อมูลฟอรัม
   love | Int | จำนวนหัวใจฟอรัม
-- Header:
-```json
-headers: {
-  "Content-Type": "application/json",
-  "x-api-key": "API_KEY"
-}
-```
+
 - Body:
 ```json
 {
@@ -162,13 +142,7 @@ headers: {
   ---- | ---- | ---- |
   author | String | ชื่อผู้เขียนฟอรัม
   detail | String | รายละเอียดข้อมูลฟอรัม
-- Header:
-```json
-headers: {
-  "Content-Type": "application/json",
-  "x-api-key": "API_KEY"
-}
-```
+
 - Body:
 ```json
 {
@@ -180,24 +154,12 @@ headers: {
 ### 5. Update love state
 - Method: PATCH
 - Endpoint: /api/v1/forum/${id}/love
-- Header:
-```json
-headers: {
-  "Content-Type": "application/json",
-  "x-api-key": "API_KEY"
-}
-```
+
 
 ### 6. Delete customer
 - Method: DELETE
 - URL: /api/v1/forum/${id}
-- Header:
-```json
-headers: {
-  "Content-Type": "application/json",
-  "x-api-key": "API_KEY"
-}
-```
+
 ---
 ## 📞 ติดต่อผู้พัฒนา
 หากมีข้อสงสัยหรือต้องการความช่วยเหลือ สามารถติดต่อได้ที่:
