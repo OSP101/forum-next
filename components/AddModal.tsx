@@ -7,12 +7,18 @@ const kanit = Prompt({ subsets: ["latin"], weight: ['100', '200', '300', '400', 
 
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY
 
 export default function AddModal({ isOpen, onOpenChange, refresh }: any) {
   const [newForum, setNewForum] = useState({ author: '', detail: '', love: '' })
 
   const handleSubmit = async () => {
-    await axios.post(`${BASE_URL}/api/v1/forum`, newForum)
+    await axios.post(`${BASE_URL}/api/v1/forum`, newForum , {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': API_KEY
+      }
+    })
     refresh()
     onOpenChange(false)
   }
